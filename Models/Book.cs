@@ -9,6 +9,9 @@ namespace systemBiblioteczny.Models
         public int Id { get; set; }
 
         [Column(TypeName = "varchar(100)")]
+        public string Title { get; set; }
+
+        [Column(TypeName = "varchar(100)")]
         public string Author { get; set; }
 
         [Column(TypeName = "varchar(50)")]
@@ -20,9 +23,8 @@ namespace systemBiblioteczny.Models
         [Column(TypeName = "date")]
         public DateTime ReleaseDate { get; set; }
 
-        [ForeignKey("BookStatus")]
+        [Column(TypeName = "int")]
         public int IdBookStatus { get; set; }
 
-        public BookStatuses BookStatuses { get; set; }
     }
 }

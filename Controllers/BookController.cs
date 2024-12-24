@@ -1,20 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using systemBiblioteczny.Models;
 
 namespace systemBiblioteczny.Controllers
 {
     public class BookController : Controller
     {
+
+        private readonly BooksDbContext _context;
+
+        public BookController(BooksDbContext context)
+        {
+            _context = context;
+        }
+
+
         // GET: BookController
         public ActionResult Index()
         {
-            return View();
+            //ViewData["error"] = "All good";
+            return View(_context.Books.ToList());
         }
 
         // GET: BookController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(_context.Books.Find(id));
         }
 
         // GET: BookController/Create
@@ -26,10 +36,12 @@ namespace systemBiblioteczny.Controllers
         // POST: BookController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Book book)
         {
             try
             {
+                _context.Books.Add(book);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -47,10 +59,12 @@ namespace systemBiblioteczny.Controllers
         // POST: BookController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Book book)
         {
             try
             {
+                _context.Books.Update(book);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -60,23 +74,27 @@ namespace systemBiblioteczny.Controllers
         }
 
         // GET: BookController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: BookController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Book book)
         {
             try
             {
+                _context.Books.Remove(book);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+
+                //ViewData["error"] = e.Message;
+                return RedirectToAction(nameof(Index));
             }
         }
     }

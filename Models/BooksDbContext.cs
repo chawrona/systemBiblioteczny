@@ -5,13 +5,8 @@ namespace systemBiblioteczny.Models
     public class BooksDbContext : DbContext
     {
 
-        public BooksDbContext(DbContextOptions<BooksDbContext> options) : base(options) 
-        {
-        
-        
-        }
+        public BooksDbContext(DbContextOptions<BooksDbContext> options) : base(options) {}
 
         public DbSet<Book> Books { get; set; }
-        public DbSet<BookStatus> BookStatuses { get; set; }
     }
 }
