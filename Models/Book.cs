@@ -23,8 +23,12 @@ namespace systemBiblioteczny.Models
         [Column(TypeName = "date")]
         public DateTime ReleaseDate { get; set; }
 
-        [Column(TypeName = "int")]
+        [ForeignKey("BookStatus")]
         public int IdBookStatus { get; set; }
+        public BookStatus BookStatus { get; set; }
+
+
+        public ICollection<Rental> Rentals { get; set; }
 
     }
 }

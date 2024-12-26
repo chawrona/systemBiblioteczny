@@ -12,8 +12,8 @@ using systemBiblioteczny.Models;
 namespace systemBiblioteczny.Migrations
 {
     [DbContext(typeof(BooksDbContext))]
-    [Migration("20241222071149_migracja3")]
-    partial class migracja3
+    [Migration("20241226004949_nowa")]
+    partial class nowa
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace systemBiblioteczny.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int>("BookStatusesId")
+                    b.Property<int>("BookStatusId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -54,14 +54,18 @@ namespace systemBiblioteczny.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("date");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BookStatusesId");
+                    b.HasIndex("BookStatusId");
 
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("systemBiblioteczny.Models.BookStatuses", b =>
+            modelBuilder.Entity("systemBiblioteczny.Models.BookStatus", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,25 +75,25 @@ namespace systemBiblioteczny.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("BookStatuses");
+                    b.ToTable("BooksStatuses");
                 });
 
             modelBuilder.Entity("systemBiblioteczny.Models.Book", b =>
                 {
-                    b.HasOne("systemBiblioteczny.Models.BookStatuses", "BookStatuses")
+                    b.HasOne("systemBiblioteczny.Models.BookStatus", "BookStatus")
                         .WithMany("Books")
-                        .HasForeignKey("BookStatusesId")
+                        .HasForeignKey("BookStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BookStatuses");
+                    b.Navigation("BookStatus");
                 });
 
-            modelBuilder.Entity("systemBiblioteczny.Models.BookStatuses", b =>
+            modelBuilder.Entity("systemBiblioteczny.Models.BookStatus", b =>
                 {
                     b.Navigation("Books");
                 });

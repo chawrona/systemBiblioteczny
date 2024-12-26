@@ -14,36 +14,66 @@
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly"></div>
 
-    <label asp-for="Title"></label>
-    <input asp-for="Title"/>
-    <span asp-validation-for="Title"></span>
+    <div class="form-divider">
+        <label asp-for="Title"></label>
+        <input asp-for="Title"/>
+        <span asp-validation-for="Title"></span>
+    </div> 
 
-    <label asp-for="Author"></label>
-    <input asp-for="Author"/>
-    <span asp-validation-for="Author"></span>
 
-    <label asp-for="Genre"></label>
-    <input asp-for="Genre"/>
-    <span asp-validation-for="Genre"></span>
+    <div class="form-divider">
+        <label asp-for="Author"></label>
+        <input asp-for="Author"/>
+        <span asp-validation-for="Author"></span>
+    </div>
 
-    <label asp-for="Description"></label>
-    <input asp-for="Description"/>
-    <span asp-validation-for="Description"></span>
+    <div class="form-divider">
+        <label asp-for="Genre"></label>
+        <input asp-for="Genre"/>
+        <span asp-validation-for="Genre"></span>
+    </div> 
 
-    <label asp-for="ReleaseDate"></label>
-    <input asp-for="ReleaseDate"/>
-    <span asp-validation-for="ReleaseDate"></span>
+    <div class="form-divider">
+        <label asp-for="Description"></label>
+        <input asp-for="Description"/>
+        <span asp-validation-for="Description"></span>
+    </div>
 
-    <input type="hidden" asp-for="Id"/>
-    <input type="hidden" asp-for="IdBookStatus"/>
+    <div class="form-divider">
+        <label asp-for="ReleaseDate">Release Date</label>
+        <input asp-for="ReleaseDate"/>
+        <span asp-validation-for="ReleaseDate"></span>
+    </div>
 
-    <button type="submit" value="Edit">Edit</button>
+    <div class="form-divider">
+        <label asp-for="IdBookStatus">Book Status</label>
+        <select asp-for="IdBookStatus" name="IdBookStatus">
+            @foreach (var status in ViewBag.IdBookStatus as SelectList)
+            {
+                <option value="@status.Value">@status.Text</option>
+            }
+        </select>
+        <span asp-validation-for="IdBookStatus" class="text-danger"></span>
+    </div>
+
+    <div class="form-divider">
+         <button type="submit" value="Edit" id="editButton">Save</button>
+         <span></span>
+    </div>
+
+    <input type="hidden" asp-for="Id" />
 </form>
 
 
 @* @Html.ActionLink($"Remove {Model.Title}", "Delete", new { id = Model.Id }, new { @class = "a-btn"} ) *@
 
 <form method="post" asp-action="Delete" class="hidden-form">
+
+    <button type="submit" class="hidden-form-button">Delete</button>
+
+
+    <a asp-action="Index" class="a-btn special">All Books</a>
+
     <div>
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="Title" />
@@ -54,7 +84,23 @@
         <input type="hidden" asp-for="IdBookStatus" />
     </div>
 
-    <button type="submit" class="hidden-form-button">Delete</button>
 </form>
 
-<a asp-action="Index" class="a-btn">All Books</a>
+@if (Model.IdBookStatus == 1) // Available
+{
+    <form method="post" asp-action="Reserve" class="hidden-form">
+
+        
+
+
+        <div>
+            <input type="hidden" name="id" value="@Model.Id"/>
+        </div>
+
+        <button type="submit" class="hidden-form-button">Reserve</button>
+    </form>
+}
+
+
+<script src="~/js/disablingEditing.js"></script>
+

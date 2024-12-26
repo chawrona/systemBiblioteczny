@@ -1,53 +1,69 @@
 ﻿@model systemBiblioteczny.Models.Book
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add a book";
 }
 
-<h1>Create</h1>
 
-<h4>Book</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Author" class="control-label"></label>
-                <input asp-for="Author" class="form-control" />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Genre" class="control-label"></label>
-                <input asp-for="Genre" class="form-control" />
-                <span asp-validation-for="Genre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
-                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdBookStatus" class="control-label"></label>
-                <input asp-for="IdBookStatus" class="form-control" />
-                <span asp-validation-for="IdBookStatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<h1>Add a Book</h1>
+
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="form-divider">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <div class="form-divider">
+        <label asp-for="Author"></label>
+        <input asp-for="Author" />
+        <span asp-validation-for="Author"></span>
+    </div>
+
+    <div class="form-divider">
+        <label asp-for="Genre"></label>
+        <input asp-for="Genre" />
+        <span asp-validation-for="Genre"></span>
+    </div>
+
+    <div class="form-divider">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="form-divider">
+        <label asp-for="ReleaseDate">Release Date</label>
+        <input asp-for="ReleaseDate" />
+        <span asp-validation-for="ReleaseDate"></span>
+    </div>
+
+    <div class="form-divider">
+        <label asp-for="IdBookStatus">Book Status</label>
+        <select asp-for="IdBookStatus" name="IdBookStatus">
+            @foreach (var status in ViewBag.IdBookStatus as SelectList) {
+                <option value="@status.Value">@status.Text</option>
+            }
+
+        </select>
+        <span asp-validation-for="IdBookStatus" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-divider">
+        <button type="submit" value="Create" id="createButton">Create</button>
+        <span></span>
+    </div>   
+    
+    <div class="form-divider">
+        <a asp-action="Index" class="a-btn">All Books</a>
+        <span></span>
+    </div>
+
+</form>
+
+

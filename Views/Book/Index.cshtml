@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<systemBiblioteczny.Models.Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Books";
 }
 
 <h1>Books</h1>
@@ -19,7 +19,7 @@
         <div class="element-item"> @item.Author </div>
         <div class="element-item"> @item.Genre </div>
         <div class="element-item"> @item.ReleaseDate.ToString("yyyy")</div>
-        <div class="element-item"> @item.IdBookStatus</div>
+        <div class="element-item"> @item.BookStatus.Status.Substring(0, 1).ToUpper()@item.BookStatus.Status.Substring(1)</div>
      </a>
 }
 

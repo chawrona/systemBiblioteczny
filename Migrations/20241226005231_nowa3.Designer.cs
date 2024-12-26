@@ -12,8 +12,8 @@ using systemBiblioteczny.Models;
 namespace systemBiblioteczny.Migrations
 {
     [DbContext(typeof(BooksDbContext))]
-    [Migration("20241222070157_Initial")]
-    partial class Initial
+    [Migration("20241226005231_nowa3")]
+    partial class nowa3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,9 +51,48 @@ namespace systemBiblioteczny.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("date");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("IdBookStatus");
+
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("systemBiblioteczny.Models.BookStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BooksStatuses");
+                });
+
+            modelBuilder.Entity("systemBiblioteczny.Models.Book", b =>
+                {
+                    b.HasOne("systemBiblioteczny.Models.BookStatus", "BookStatus")
+                        .WithMany("Books")
+                        .HasForeignKey("IdBookStatus")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BookStatus");
+                });
+
+            modelBuilder.Entity("systemBiblioteczny.Models.BookStatus", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

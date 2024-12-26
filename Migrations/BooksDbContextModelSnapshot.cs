@@ -54,7 +54,42 @@ namespace systemBiblioteczny.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdBookStatus");
+
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("systemBiblioteczny.Models.BookStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BooksStatuses");
+                });
+
+            modelBuilder.Entity("systemBiblioteczny.Models.Book", b =>
+                {
+                    b.HasOne("systemBiblioteczny.Models.BookStatus", "BookStatus")
+                        .WithMany("Books")
+                        .HasForeignKey("IdBookStatus")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BookStatus");
+                });
+
+            modelBuilder.Entity("systemBiblioteczny.Models.BookStatus", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
