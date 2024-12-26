@@ -12,7 +12,6 @@ namespace systemBiblioteczny.Models
         [Column(TypeName = "varchar(100)")]
         public string Status { get; set; }
 
-        // Relacja
         public ICollection<Book> Books { get; set; }
 
     }

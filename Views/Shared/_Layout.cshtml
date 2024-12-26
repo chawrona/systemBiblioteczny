@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
-    <title>@ViewData["Title"] - systemBiblioteczny</title>
+    <title>@ViewData["Title"]</title>
 </head>
 <body>
     <nav>
         <a asp-area="" asp-controller="Book" asp-action="Index">Books</a>
         <a asp-area="" asp-controller="Book" asp-action="Create">Create</a>
-        <a asp-area="" asp-controller="Book" asp-action="Index">Rezerwacje</a>
-        <a asp-area="" asp-controller="Book" asp-action="Index">Wypożyczenia</a>
+        <a asp-area="" asp-controller="Book" asp-action="Reserve">Reservations</a>
+        <a asp-area="" asp-controller="Book" asp-action="Borrowed">Borrowed</a>
+        <a asp-area="" asp-controller="Book" asp-action="Archive">Archive</a>
     </nav>
 
     <main>
         @RenderBody()
     </main>
-
 
     <footer>Books 2024 ®</footer>
     <script src="~/js/site.js" asp-append-version="true"></script>

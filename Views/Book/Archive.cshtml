@@ -1,0 +1,24 @@
+﻿@model IEnumerable<systemBiblioteczny.Models.Rental>
+
+@{
+    ViewData["Title"] = "Archive";
+}
+
+<h1>Rentals Archive</h1>
+
+<div class="list">
+    @foreach (var reservation in Model)
+    {
+
+        <div class="element">
+            <div class="element-title element-item"> @reservation.Book.Title </div>  @* Book Title *@
+            <div class="element-item"> @reservation.LibraryCardNumber </div>
+            <div class="element-item"> @reservation.StartDate.ToString("dd-mm-yyyy")</div>
+            <div class="element-item"> @reservation.EndDate.ToString("dd-mm-yyyy")</div>
+        </div>
+    }
+
+</div>
+
+
+

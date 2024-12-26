@@ -1,23 +1,6 @@
-1. Dokoñczyæ formularz rezerwacji ksi¹¿ki
-	Dodawanie rezerwacji
-	zmiana statusu ksi¹¿ki
+1. Strona z logowaniem
+2. Wyœwietlanie w zale¿noœci od zalogowania
+3. CSS
+4. Trigger usuwaj¹cy rezerwacje jak przekroczona data
 
-
-2. Wyœwietliæ zarezerwowane ksi¹¿ki
-3. Usuwanie rezerwacji, przenoszenie ich do wypo¿yczeñ (zmiana statusu (odwo³ana, wypo¿yczona, zarezerwowana, zakoñczona))
-4. Wypo¿yczenia
-
-
-5. Wyœwietlanie wypo¿yczeñ
-
-
-PODSTRONY:
-Ksi¹¿ki
-	formularz JS sortuj¹cy
-
-Ksi¹¿ka
-	Zarezerwuj ksi¹¿kê (je¿eli dostêpna)
-
-Wypo¿yczenia ksi¹¿ek
-
-Rezerwacje ksi¹¿ek
+dodaæ trigger usuwaj¹cy rezerwacje

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<systemBiblioteczny.Models.Rental>
+
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<h1>Reservations</h1>
+
+<div class="list">
+    @foreach (var reservation in Model)
+    {
+
+        <div class="element">
+            <div class="element-title element-item"> @reservation.Book.Title </div>  @* Book Title *@
+            <div class="element-item"> @reservation.LibraryCardNumber </div>
+            <div class="element-item"> @reservation.StartDate.ToString("dd-mm-yyyy")</div>
+            <div class="element-item"> @reservation.EndDate.ToString("dd-mm-yyyy")</div>
+
+            <form asp-action="Borrowed" class="element-form">
+                <button type="submit" class="element-form-button">Issue</button>
+                <input type="hidden" name="id" value="@reservation.Id"/>
+                <input type="hidden" name="idBook" value="@reservation.IdBook"/>
+            </form>
+
+        </div>
+    }
+
+</div>
+
+
+    

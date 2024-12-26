@@ -9,5 +9,6 @@ namespace systemBiblioteczny.Models
 
         public DbSet<Book> Books { get; set; }
         public DbSet<BookStatus> BooksStatuses { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
     }
 }

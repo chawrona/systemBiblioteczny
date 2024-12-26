@@ -27,7 +27,6 @@ namespace systemBiblioteczny.Models
         public int IdBookStatus { get; set; }
         public BookStatus BookStatus { get; set; }
 
-
         public ICollection<Rental> Rentals { get; set; }
 
     }
