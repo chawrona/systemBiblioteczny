@@ -1,6 +1,0 @@
-1. Strona z logowaniem
-2. Wyœwietlanie w zale¿noœci od zalogowania
-3. CSS
-4. Trigger usuwaj¹cy rezerwacje jak przekroczona data
-
-dodaæ trigger usuwaj¹cy rezerwacje
