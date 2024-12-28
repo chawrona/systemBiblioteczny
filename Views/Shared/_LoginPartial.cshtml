@@ -1,0 +1,24 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <div id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result?.Login</div>
+
+        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
+            <button id="logout" type="submit">
+                <img src="~/logout.svg" alt="logout" />
+            </button>
+        </form>
+   
+}
+else
+{
+        <a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+}
+

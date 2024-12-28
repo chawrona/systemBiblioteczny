@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using systemBiblioteczny.Areas.Identity.Data;
 using systemBiblioteczny.Models;
-using systemBiblioteczny.Models; 
 
 namespace systemBiblioteczny.Controllers {
 
     public class BookController : Controller {
 
-        private readonly BooksDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public BookController(BooksDbContext context) { _context = context; }
+        public BookController(ApplicationDbContext context) { _context = context; }
 
         public ActionResult Index() { return View(_context.Books.Include(b => b.BookStatus).ToList()); }
 
@@ -24,6 +25,18 @@ namespace systemBiblioteczny.Controllers {
         }
 
         public ActionResult Reserve() {
+
+            var expiredRentals = _context.Rentals.Where(r => r.EndDate < DateTime.Now && r.Status == "Pending").ToList();
+
+            foreach (var rental in expiredRentals)
+            {
+                _context.Rentals.Remove(rental);
+                var book = _context.Books.First(b => b.Id == rental.IdBook);
+                book.IdBookStatus = 1;
+            }
+
+            _context.SaveChanges();
+
             var rentals = _context.Rentals.Include(r => r.Book).Where(r => r.Status == "Pending").ToList();
             return View(rentals);
         }
@@ -103,7 +116,24 @@ namespace systemBiblioteczny.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind("Id", "Title", "Author", "Genre", "Description", "ReleaseDate", "IdBookStatus")] Book book) {
 
-            if (ModelState.IsValid) {
+            //if (!ModelState.IsValid)
+            //{
+            //    foreach (var key in ModelState.Keys)
+            //    {
+            //        foreach (var error in ModelState[key].Errors)
+            //        {
+            //            // Log or display the error message
+            //            System.Diagnostics.Debug.WriteLine($"Field: {key}, Error: {error.ErrorMessage}");
+            //        }
+            //    }
+            //}
+
+            ModelState.Remove("BookStatus");
+            ModelState.Remove("Rentals");
+
+            //if(true) {
+            if (ModelState.IsValid)
+                {
                 _context.Books.Add(book);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));

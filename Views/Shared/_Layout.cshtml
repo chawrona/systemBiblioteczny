@@ -8,11 +8,20 @@
 </head>
 <body>
     <nav>
+        <img src="~/books.png" alt="Logo" />
         <a asp-area="" asp-controller="Book" asp-action="Index">Books</a>
-        <a asp-area="" asp-controller="Book" asp-action="Create">Create</a>
-        <a asp-area="" asp-controller="Book" asp-action="Reserve">Reservations</a>
-        <a asp-area="" asp-controller="Book" asp-action="Borrowed">Borrowed</a>
-        <a asp-area="" asp-controller="Book" asp-action="Archive">Archive</a>
+
+        @if (User.IsInRole("Admin")) {
+
+            <a asp-area="" asp-controller="Book" asp-action="Create">Create</a>
+            <a asp-area="" asp-controller="Book" asp-action="Reserve">Reservations</a>
+            <a asp-area="" asp-controller="Book" asp-action="Borrowed">Borrowed</a>
+            <a asp-area="" asp-controller="Book" asp-action="Archive">Archive</a>
+
+        }
+
+
+        <partial name="_LoginPartial" />
     </nav>
 
     <main>

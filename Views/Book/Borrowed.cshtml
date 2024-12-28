@@ -6,6 +6,8 @@
 
 <h1>Borrowed</h1>
 
+@if (User.IsInRole("Admin")) {
+
 <div class="list">
     @foreach (var reservation in Model)
     {
@@ -31,3 +33,4 @@
 
 
 
+}

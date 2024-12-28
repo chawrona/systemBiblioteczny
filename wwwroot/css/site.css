@@ -80,12 +80,63 @@ form {
 
 }
 
+nav img[alt="Logo"] {
+    margin-left: 1rem;
+}
+#manage {
+    margin-top: 0 !important;
+    margin-left: auto;
+
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-size: 20px;
+}
+
+#register {
+    margin-left: auto;
+}
+
+#logoutForm {
+    display: inline !important;
+    margin-top: 0;
+}
+
+#logout {
+
+    margin-top: 0;
+    display: block;
+    color: #ffffff;
+    background: none;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.64rem 1.5rem;
+    font-size: 22px;
+    &:hover{
+        background-color: #ffffff17;
+        /*    filter: brightness(1.25);*/
+    }
+
+           img {
+               width: 32px;
+               height: 100%;
+           }
+
+           
+}
+
+#forgot-password {
+    margin-top: 1rem;
+}
+
 .element-form {
     margin-top: 0;
     display: flex;
     justify-content: center;
-
-    button[type=submit] {
+    button [type=submit] {
                margin-top: 0;
            }
 }

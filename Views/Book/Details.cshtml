@@ -6,77 +6,84 @@
 
 <h1>@Model.Title (@Model.ReleaseDate.ToString("yyyy"))</h1>
 <h2>@Model.Author</h2>
-<h3>@Model.Genre, Status: @Model.IdBookStatus</h3>
+<h3>@Model.Genre</h3>
 <div class="book-description">
     @Model.Description
 </div>
 
-<form asp-action="Edit">
-    <div asp-validation-summary="ModelOnly"></div>
-
-    <div class="form-divider">
-        <label asp-for="Title"></label>
-        <input asp-for="Title"/>
-        <span asp-validation-for="Title"></span>
-    </div> 
+@if (User.IsInRole("Admin"))
+{
 
 
-    <div class="form-divider">
-        <label asp-for="Author"></label>
-        <input asp-for="Author"/>
-        <span asp-validation-for="Author"></span>
-    </div>
 
-    <div class="form-divider">
-        <label asp-for="Genre"></label>
-        <input asp-for="Genre"/>
-        <span asp-validation-for="Genre"></span>
-    </div> 
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly"></div>
 
-    <div class="form-divider">
-        <label asp-for="Description"></label>
-        <input asp-for="Description"/>
-        <span asp-validation-for="Description"></span>
-    </div>
-
-    <div class="form-divider">
-        <label asp-for="ReleaseDate">Release Date</label>
-        <input asp-for="ReleaseDate"/>
-        <span asp-validation-for="ReleaseDate"></span>
-    </div>
-
-    <div class="form-divider">
-        <input type="hidden" asp-for="IdBookStatus" />
-    </div>
-
-    <div class="form-divider">
-         <button type="submit" value="Edit" id="editButton">Save</button>
-         <span></span>
-    </div>
-
-    <input type="hidden" asp-for="Id" />
-</form>
+        <div class="form-divider">
+            <label asp-for="Title"></label>
+            <input asp-for="Title"/>
+            <span asp-validation-for="Title"></span>
+        </div> 
 
 
-@* @Html.ActionLink($"Remove {Model.Title}", "Delete", new { id = Model.Id }, new { @class = "a-btn"} ) *@
+        <div class="form-divider">
+            <label asp-for="Author"></label>
+            <input asp-for="Author"/>
+            <span asp-validation-for="Author"></span>
+        </div>
 
-<form method="post" asp-action="Delete" class="hidden-form">
+        <div class="form-divider">
+            <label asp-for="Genre"></label>
+            <input asp-for="Genre"/>
+            <span asp-validation-for="Genre"></span>
+        </div> 
 
-    <button type="submit" class="hidden-form-button">Delete</button>
+        <div class="form-divider">
+            <label asp-for="Description"></label>
+            <input asp-for="Description"/>
+            <span asp-validation-for="Description"></span>
+        </div>
 
-    <div>
+        <div class="form-divider">
+            <label asp-for="ReleaseDate">Release Date</label>
+            <input asp-for="ReleaseDate"/>
+            <span asp-validation-for="ReleaseDate"></span>
+        </div>
+
+        <div class="form-divider">
+            <input type="hidden" asp-for="IdBookStatus" />
+        </div>
+
+        <div class="form-divider">
+            <button type="submit" value="Edit" id="editButton">Save</button>
+            <span></span>
+        </div>
+
         <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="Title" />
-        <input type="hidden" asp-for="Author" />
-        <input type="hidden" asp-for="Genre" />
-        <input type="hidden" asp-for="Description" />
-        <input type="hidden" asp-for="ReleaseDate" />
-        <input type="hidden" asp-for="IdBookStatus" />
-    </div>
+    </form>
 
-</form>
 
-@if (Model.IdBookStatus == 1) // Available
+    @* @Html.ActionLink($"Remove {Model.Title}", "Delete", new { id = Model.Id }, new { @class = "a-btn"} ) *@
+
+    <form method="post" asp-action="Delete" class="hidden-form">
+
+        <button type="submit" class="hidden-form-button">Delete</button>
+
+        <div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Title" />
+            <input type="hidden" asp-for="Author" />
+            <input type="hidden" asp-for="Genre" />
+            <input type="hidden" asp-for="Description" />
+            <input type="hidden" asp-for="ReleaseDate" />
+            <input type="hidden" asp-for="IdBookStatus" />
+        </div>
+
+    </form>
+
+}
+
+@if (Model.IdBookStatus == 1 && User.Identity.IsAuthenticated) // Available
 {
 
     <h2>Reserve @Model.Title</h2>

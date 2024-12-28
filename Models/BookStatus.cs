@@ -7,9 +7,10 @@ namespace systemBiblioteczny.Models
     {
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [Column(TypeName = "varchar(100)")]
+        [Column(TypeName = "varchar(50)")]
         public string Status { get; set; }
 
         public ICollection<Book> Books { get; set; }

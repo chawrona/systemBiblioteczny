@@ -9,16 +9,16 @@ namespace systemBiblioteczny.Models
         [Key]
         public int Id { get; set; }
 
-        [Column(TypeName = "datetime2")]
+        [Column(TypeName = "datetime")]
         public DateTime StartDate { get; set; }
 
-        [Column(TypeName = "datetime2")]
+        [Column(TypeName = "datetime")]
         public DateTime EndDate { get; set; }
 
         [Column(TypeName = "int")]
         public int LibraryCardNumber { get; set; }
 
-        [Column(TypeName = "nvarchar(max)")]
+        [Column(TypeName = "nvarchar(50)")]
         public string? Status { get; set; }
 
         [ForeignKey("Book")]
