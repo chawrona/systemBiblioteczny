@@ -1,0 +1,17 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Activate Account";
+}
+
+<h1>@ViewData["Title"]</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+<p>
+            Click this link to activate your account: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+</p>
+    }
+    
+}
+
