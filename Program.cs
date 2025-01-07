@@ -122,7 +122,7 @@ async Task CreateUsers(WebApplication app)
         var adminPassword = "Admin123!";
         var userPassword = "User123!";
 
-        // SprawdŸ, czy u¿ytkownicy ju¿ istniej¹
+        // SprawdÅ¸, czy uÂ¿ytkownicy juÂ¿ istniejÂ¹
         var adminUser = await userManager.FindByEmailAsync(adminEmail);
         var normalUser = await userManager.FindByEmailAsync(userEmail);
 
@@ -137,6 +137,8 @@ async Task CreateUsers(WebApplication app)
             var result = await userManager.CreateAsync(adminUser, adminPassword);
             if (result.Succeeded)
             {
+                adminUser.EmailConfirmed = true;
+                await userManager.UpdateAsync(adminUser);
                 await userManager.AddToRoleAsync(adminUser, "Admin");
             }
         }
@@ -152,6 +154,8 @@ async Task CreateUsers(WebApplication app)
             var result = await userManager.CreateAsync(normalUser, userPassword);
             if (result.Succeeded)
             {
+                normalUser.EmailConfirmed = true;
+                await userManager.UpdateAsync(normalUser);
                 await userManager.AddToRoleAsync(normalUser, "User");
             }
         }
